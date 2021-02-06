@@ -11,6 +11,8 @@ class MainTableViewController: UITableViewController {
 
     var cities = DataStorage.getSavedCities()
     
+    fileprivate var timerForUpdate: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "CityWeatherCell", bundle: nil), forCellReuseIdentifier: "CityWeatherCell")
@@ -21,6 +23,12 @@ class MainTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         self.cities = DataStorage.getSavedCities()
         self.tableView.reloadData()
+        
+        //update the weather every 1 minute if you're on this screen
+        timerForUpdate?.invalidate()
+        timerForUpdate = Timer.scheduledTimer(withTimeInterval: 60, repeats: true, block: { (_) in
+            self.tableView.reloadData()
+        })
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

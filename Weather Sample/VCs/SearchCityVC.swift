@@ -13,7 +13,7 @@ extension SearchCityVC: UISearchBarDelegate {
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        //to delay searching in case user continue entereing the text. Search starts in 0.5 second after user typed last symbol
         searchTimer?.invalidate()
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             self.cityList = DataStorage.searchCities(startingWith: searchText)
@@ -32,6 +32,7 @@ class SearchCityVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.tableFooterView = UIView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
