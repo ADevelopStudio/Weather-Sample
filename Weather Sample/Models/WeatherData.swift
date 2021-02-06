@@ -87,4 +87,8 @@ struct WeatherData: Codable {
     var coord: Location
     var weather: [WeatheDetails]
     var main: WeatherMain
+    
+    var temterature: String {
+        return "\(self.main.temp < 0 ? "" : "+")\(Int(self.main.temp))℃"
+    }
 }

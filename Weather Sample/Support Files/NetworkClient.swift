@@ -11,10 +11,10 @@ struct NetworkClient {
     private static let baseURL = "https://api.openweathermap.org/data/2.5/weather"
     private static let appID = "6fb230ebd5acaa6946bf6d09830d27fc"
     
-    static func getWeather(cityId: Int, complition:  @escaping(Result<WeatherData, Error>)->()) {
-        guard let url = URL(string: "\(baseURL)?id=\(cityId)&units=metric&APPID=\(appID)") else {
+    static func getWeather(city: City, complition:  @escaping(Result<WeatherData, Error>)->()) {
+        guard let url = URL(string: "\(baseURL)?id=\(city.id)&units=metric&APPID=\(appID)") else {
             let manualError = NSError(domain: baseURL, code:  0, userInfo: [NSLocalizedDescriptionKey: "Cant create URL"])
-            complition(.failure(manualError))
+            DispatchQueue.main.async { complition(.failure(manualError)) }
             return
         }
         let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
@@ -25,18 +25,16 @@ struct NetworkClient {
                 response.statusCode == 200,
                 let data = data else {
                 let manualError = NSError(domain: url.absoluteString, code:  0, userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])
-                complition(.failure(error ?? manualError))
+                DispatchQueue.main.async { complition(.failure(error ?? manualError))}
                 return
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
                 let weatherData: WeatherData = try decoder.decode(WeatherData.self, from: data)
-                print(weatherData)
-                complition(.success(weatherData))
+                DispatchQueue.main.async { complition(.success(weatherData))}
             } catch {
-                complition(.failure(error))
-                print("Error: \(error)")
+                DispatchQueue.main.async { complition(.failure(error))}
             }
         })
         task.resume()

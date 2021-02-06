@@ -9,20 +9,31 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
+    var cities = DataStorage.getSavedCities()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkClient.getWeather(cityId: 4163971){
-            switch $0 {
-            case .success(let data):
-                print(data.main.temp)
-                break;
-            case .failure(_):
-                break
-            }
-        }
+        tableView.register(UINib(nibName: "CityWeatherCell", bundle: nil), forCellReuseIdentifier: "CityWeatherCell")
+        tableView.tableFooterView = UIView()
+//        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.cities = DataStorage.getSavedCities()
+        self.tableView.reloadData()
     }
 
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return cities.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CityWeatherCell", for: indexPath) as? CityWeatherCell else {
+            return UITableViewCell()
+        }
+        cell.fillWith(city: cities[indexPath.row])
+        return cell
     }
 }
