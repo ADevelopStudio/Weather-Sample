@@ -15,7 +15,6 @@ class MainTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "CityWeatherCell", bundle: nil), forCellReuseIdentifier: "CityWeatherCell")
         tableView.tableFooterView = UIView()
-//        tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,7 +23,10 @@ class MainTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
 
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cities.count
     }
