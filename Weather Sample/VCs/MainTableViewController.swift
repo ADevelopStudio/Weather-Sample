@@ -24,7 +24,7 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 50
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,4 +38,21 @@ class MainTableViewController: UITableViewController {
         cell.fillWith(city: cities[indexPath.row])
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) as? CityWeatherCell,
+              let cityWeather = cell.cityWeather else {
+            self.performSegue(withIdentifier: "details", sender: PassedToDetailView.needToLoad(city:  cities[indexPath.row]))
+            return
+        }
+        self.performSegue(withIdentifier: "details", sender: PassedToDetailView.fulldata(data: cityWeather))
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailedWeatherVC, let data = sender as? PassedToDetailView {
+            vc.passedData = data
+        }
+    }
+    
 }

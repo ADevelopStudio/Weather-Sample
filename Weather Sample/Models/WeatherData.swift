@@ -52,7 +52,7 @@ import Foundation
  }
  */
 
-struct Location: Codable {
+fileprivate struct Location: Codable {
     var longitude: Double
     var latitude : Double
     
@@ -62,7 +62,7 @@ struct Location: Codable {
     }
 }
 
-struct WeatheDetails: Codable {
+fileprivate struct WeatheDetails: Codable {
     var details: String
     var icon: String
 
@@ -71,7 +71,7 @@ struct WeatheDetails: Codable {
         case icon
     }
 }
-struct WeatherMain: Codable {
+fileprivate struct WeatherMain: Codable {
     var temp: Double
     var feelsLike: Double
     var tempMin: Double
@@ -84,11 +84,43 @@ struct WeatherMain: Codable {
 struct WeatherData: Codable {
     var id: Int
     var name: String
-    var coord: Location
-    var weather: [WeatheDetails]
-    var main: WeatherMain
+    private var coord: Location
+    private var weather: [WeatheDetails]
+    private var main: WeatherMain
+}
+
+extension WeatherData {
+    var imageUrl: URL? {
+        guard let icon = self.weather.first?.icon, !icon.isEmpty,
+              let url = URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png") else {
+            return nil
+        }
+        return url
+    }
+    var smallImageUrl: URL? {
+        guard let icon = self.weather.first?.icon, !icon.isEmpty,
+              let url = URL(string: "https://openweathermap.org/img/wn/\(icon).png") else {
+            return nil
+        }
+        return url
+    }
     
-    var temterature: String {
-        return "\(self.main.temp < 0 ? "" : "+")\(Int(self.main.temp))℃"
+    func getData(type: TypeOfWeatherData) -> String {
+        switch type {
+        case .humidity:
+            return "\(Int(self.main.humidity))%"
+        case .weatherDescr:
+            return self.weather.map({$0.details}).joined(separator: ", ")
+        case .temperature:
+            return "\(self.main.temp < 0 ? "" : "+")\(Int(self.main.temp))℃"
+        case .temperatureFillsLike:
+            return "\(self.main.feelsLike < 0 ? "" : "+")\(Int(self.main.feelsLike))℃"
+        case .temperatureMax:
+            return "\(self.main.tempMax < 0 ? "" : "+")\(Int(self.main.tempMax))℃"
+        case .temperatureMin:
+            return "\(self.main.tempMin < 0 ? "" : "+")\(Int(self.main.tempMin))℃"
+        case .pressure:
+            return "\(Int(self.main.pressure)) hPa"
+        }
     }
 }

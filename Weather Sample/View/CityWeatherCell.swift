@@ -10,6 +10,7 @@ import UIKit
 class CityWeatherCell: UITableViewCell {
     
     @IBOutlet weak var cityName: UILabel!
+    @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
@@ -17,7 +18,8 @@ class CityWeatherCell: UITableViewCell {
         didSet {
             if let cityWeather = cityWeather {
                 self.loader.isHidden = true
-                self.subtitleLabel.text =  cityWeather.temterature
+                self.subtitleLabel.text =  cityWeather.getData(type: .temperature)
+                self.weatherIcon.load(url: cityWeather.smallImageUrl)
             }
         }
     }

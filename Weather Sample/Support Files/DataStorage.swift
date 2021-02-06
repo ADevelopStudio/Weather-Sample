@@ -44,7 +44,6 @@ struct DataStorage {
             let array = try PropertyListDecoder().decode([City].self, from: data)
             return array
         } catch {
-            print(error)
             return defaultList
         }
     }

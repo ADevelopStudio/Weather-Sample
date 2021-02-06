@@ -19,8 +19,14 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Cc8-9f-efi">
                         <rect key="frame" x="20" y="0.0" width="342" height="50"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x3D-JU-1C8">
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="aTp-nU-EYM"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-kA-JUh">
-                                <rect key="frame" x="0.0" y="0.0" width="214" height="50"/>
+                                <rect key="frame" x="34" y="0.0" width="180" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,6 +61,7 @@
                 <outlet property="cityName" destination="lcp-kA-JUh" id="eH0-u5-BOt"/>
                 <outlet property="loader" destination="trr-Dv-j4N" id="wps-Vd-17N"/>
                 <outlet property="subtitleLabel" destination="coL-aY-ShW" id="bLw-UE-28y"/>
+                <outlet property="weatherIcon" destination="x3D-JU-1C8" id="vrF-wB-PkS"/>
             </connections>
             <point key="canvasLocation" x="168.11594202898553" y="135.9375"/>
         </tableViewCell>
