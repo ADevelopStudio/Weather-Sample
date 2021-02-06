@@ -7,8 +7,16 @@
 
 import Foundation
 struct NetworkClient {
-    static func getWeather() {
-        guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?id=4163971&units=metric&APPID=6fb230ebd5acaa6946bf6d09830d27fc") else {return}
+    
+    private static let baseURL = "https://api.openweathermap.org/data/2.5/weather"
+    private static let appID = "6fb230ebd5acaa6946bf6d09830d27fc"
+    
+    static func getWeather(cityId: Int, complition:  @escaping(Result<WeatherData, Error>)->()) {
+        guard let url = URL(string: "\(baseURL)?id=\(cityId)&units=metric&APPID=\(appID)") else {
+            let manualError = NSError(domain: baseURL, code:  0, userInfo: [NSLocalizedDescriptionKey: "Cant create URL"])
+            complition(.failure(manualError))
+            return
+        }
         let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         var request = URLRequest(url: urlComponents.url!)
         request.httpMethod = "GET"
@@ -16,14 +24,18 @@ struct NetworkClient {
             guard let response = response as? HTTPURLResponse,
                 response.statusCode == 200,
                 let data = data else {
+                let manualError = NSError(domain: url.absoluteString, code:  0, userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])
+                complition(.failure(error ?? manualError))
                 return
             }
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             do {
-                let test: WeatherData = try decoder.decode(WeatherData.self, from: data)
-                print(test)
+                let weatherData: WeatherData = try decoder.decode(WeatherData.self, from: data)
+                print(weatherData)
+                complition(.success(weatherData))
             } catch {
+                complition(.failure(error))
                 print("Error: \(error)")
             }
         })

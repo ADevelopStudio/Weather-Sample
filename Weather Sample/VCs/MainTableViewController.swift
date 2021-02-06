@@ -11,7 +11,15 @@ class MainTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkClient.getWeather()
+        NetworkClient.getWeather(cityId: 4163971){
+            switch $0 {
+            case .success(let data):
+                print(data.main.temp)
+                break;
+            case .failure(_):
+                break
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
