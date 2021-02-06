@@ -41,6 +41,8 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        
         guard let cell = tableView.cellForRow(at: indexPath) as? CityWeatherCell,
               let cityWeather = cell.cityWeather else {
             self.performSegue(withIdentifier: "details", sender: PassedToDetailView.needToLoad(city:  cities[indexPath.row]))

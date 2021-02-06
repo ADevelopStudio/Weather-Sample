@@ -54,6 +54,7 @@ class SearchCityVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         let city = cityList[indexPath.row]
         if let index = savedCities.firstIndex(of: city) {
             savedCities.remove(at: index)
