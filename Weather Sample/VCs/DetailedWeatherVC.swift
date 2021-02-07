@@ -8,11 +8,14 @@
 import UIKit
 
 class DetailedWeatherVC: UIViewController {
-    @IBOutlet weak var weatherIcon: UIImageView!
+//    @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var weatherConditions: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
-    
+    @IBOutlet weak var weatherIcon: UIImageView!
+
+    private lazy var animator: UIViewPropertyAnimator = {
+        return UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+    }()
     
     var passedData: PassedToDetailView = .nothing
     
@@ -20,6 +23,12 @@ class DetailedWeatherVC: UIViewController {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         self.checkDataPassed()
+//        weatherIcon.addt
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.animator.stopAnimation(true)
     }
 
     

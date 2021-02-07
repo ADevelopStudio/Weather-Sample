@@ -10,10 +10,12 @@ import UIKit
 extension UIImageView {
     func load(url: URL?) {
         guard let  url = url else {return}
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global().async {
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {self?.image = image}
+                    DispatchQueue.main.async {
+                        UIView.transition(with: self, duration: 0.2, options: .transitionCrossDissolve, animations: { self.image = image }, completion: nil)
+                    }
                 }
             }
         }
