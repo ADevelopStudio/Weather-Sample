@@ -63,5 +63,10 @@ class MainTableViewController: UITableViewController {
             vc.passedData = data
         }
     }
-    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.1, delay:  0.1 * Double(indexPath.row), options: [.curveEaseInOut]) {
+            cell.alpha = 1
+        }
+    }
 }
