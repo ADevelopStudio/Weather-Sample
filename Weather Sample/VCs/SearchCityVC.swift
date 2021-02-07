@@ -64,4 +64,8 @@ class SearchCityVC: UITableViewController {
         }
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
+    @IBAction func donePressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }

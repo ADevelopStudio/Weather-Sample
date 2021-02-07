@@ -17,7 +17,6 @@ class CityWeatherCell: UITableViewCell {
     var cityWeather: WeatherData? {
         didSet {
             if let cityWeather = cityWeather {
-                self.loader.isHidden = true
                 self.subtitleLabel.text =  cityWeather.getData(type: .temperature)
                 self.weatherIcon.load(url: cityWeather.smallImageUrl)
             }
@@ -41,12 +40,12 @@ class CityWeatherCell: UITableViewCell {
     
     private func loadWeather(city: City) {
         NetworkClient.getWeather(city: city) { [self] in
+            self.loader.isHidden = true
             switch $0 {
             case .success(let data):
                 self.cityWeather = data
             case .failure(_):
                 self.subtitleLabel.text = "Error"
-                loader.isHidden = true
             }
         }
     }

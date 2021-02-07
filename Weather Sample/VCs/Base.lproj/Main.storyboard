@@ -25,7 +25,7 @@
                         <barButtonItem key="backBarButtonItem" title="  " id="0UG-bD-oOb"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="JJM-V8-iBX">
                             <connections>
-                                <segue destination="6Yl-Oy-6AR" kind="show" id="QEG-6w-pfK"/>
+                                <segue destination="XZR-yI-d4H" kind="presentation" modalPresentationStyle="fullScreen" id="QEG-6w-pfK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -202,7 +202,13 @@
                             <outlet property="delegate" destination="6Yl-Oy-6AR" id="3Eh-ms-0kH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="eUa-nc-Ew8"/>
+                    <navigationItem key="navigationItem" id="eUa-nc-Ew8">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="jJc-wv-gFI">
+                            <connections>
+                                <action selector="donePressed:" destination="6Yl-Oy-6AR" id="qOP-gO-NvA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u88-6G-sSm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
