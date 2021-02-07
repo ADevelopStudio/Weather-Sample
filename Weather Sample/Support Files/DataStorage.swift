@@ -11,9 +11,9 @@ struct DataStorage {
     
     ///beause I didn't want to spent time to create a storage to all 200,000 cities
     static let allTheCities: [City] = [
-        City(id: 4163971, name: "Sydney"),
-        City(id: 2147714, name: "Melbourne"),
-        City(id: 2174003, name: "Brisbane"),
+        City(id: 2147714, name: "Sydney"),
+        City(id: 2158177, name: "Melbourne"),
+        City(id: 7839562, name: "Brisbane"),
         City(id: 2165087, name: "Gold Coast"),
         City(id: 7839567, name: "Cairns"),
         City(id: 2063523, name: "Perth"),
@@ -35,9 +35,9 @@ struct DataStorage {
     
     static func getSavedCities() -> [City]{
         let defaultList = [
-            City(id: 4163971, name: "Sydney"),
-            City(id: 2147714, name: "Melbourne"),
-            City(id: 2174003, name: "Brisbane")
+            City(id: 2147714, name: "Sydney"),
+            City(id: 2158177, name: "Melbourne"),
+            City(id: 7839562, name: "Brisbane")
         ]
         guard let data = UserDefaults.standard.value(forKey:"cityList") as? Data  else {return defaultList}
         do {
