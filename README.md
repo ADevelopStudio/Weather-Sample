@@ -27,7 +27,7 @@ using 3rd party library for Networking.
 
 <h2>Brownie Points:</h2>
 
-- [ ] MVVM architectural pattern is preferred with unit tests and try to avoid using 3rd library like RxSwift.
+- [x] Unit tests and try to avoid using 3rd library like RxSwift.
 - [x] Use an activity indicator to provide some feedback to user while waiting for network response.
 - [x] Allow user to tap on a cell to open a new “Detail view”, to show more information about the city such as current weather summary, min and max temperature, humidity, etc.
 - [x] Try to use table view or collection view to display details.
