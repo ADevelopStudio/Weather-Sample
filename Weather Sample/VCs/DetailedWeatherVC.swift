@@ -8,7 +8,6 @@
 import UIKit
 
 class DetailedWeatherVC: UIViewController {
-//    @IBOutlet weak var weatherIcon: UIImageView!
     @IBOutlet weak var weatherConditions: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var weatherIcon: UIImageView!
@@ -21,7 +20,6 @@ class DetailedWeatherVC: UIViewController {
         self.checkDataPassed()
     }
 
-
     
     private func checkDataPassed()  {
         switch passedData {
@@ -33,8 +31,8 @@ class DetailedWeatherVC: UIViewController {
             self.weatherConditions.text = "Loading..."
             NetworkClient.getWeather(city: city) {
                 switch $0 {
-                case .failure(let erorr):
-                    self.weatherConditions.text = erorr.localizedDescription
+                case .failure(let error):
+                    self.weatherConditions.text = error.localizedDescription
                 case .success(let data):
                     self.passedData = .fulldata(data: data)
                     self.fillTheView()

@@ -9,7 +9,7 @@ import Foundation
 struct NetworkClient {
     
     private static let baseURL = "https://api.openweathermap.org/data/2.5/weather"
-    private static let appID = "" //ENTER HERE
+    private static let appID = "6fb230ebd5acaa6946bf6d09830d27fc" //ENTER HERE
     
     static func getWeather(city: City, complition:  @escaping(Result<WeatherData, Error>)->()) {
         if appID.isEmpty { fatalError("enter AppID")}
