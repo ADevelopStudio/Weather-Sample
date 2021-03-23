@@ -1,6 +1,6 @@
 # Weather-Sample CodeChallenge for XXXXXXX
 
-by _Dmitrii Zverev_. 7 Feb 2021
+by _Dmitrii Zverev_. 7 Feb 2021 (updated 23 March 2021 with MVVM + Coordinator)
 
 
 <h2>Coding Assignment</h2>
