@@ -27,6 +27,7 @@ using 3rd party library for Networking.
 
 <h2>Brownie Points:</h2>
 - [x] MVVM.
+- [ ]
 - [x] Coordinator.
 - [x] Unit tests and try to avoid using 3rd library like RxSwift.
 - [x] Use an activity indicator to provide some feedback to user while waiting for network response.
