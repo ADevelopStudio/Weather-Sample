@@ -38,6 +38,7 @@ fileprivate struct WeatherMain: Codable {
 
 
 struct WeatherData: Codable {
+    static let example = WeatherData(id: 124, name: "Name", coord: Location(longitude: 0, latitude: 0), weather: [], main: WeatherMain(temp: 22, feelsLike: 00, tempMin: 0, tempMax: 0, pressure: 0, humidity: 0))
     var id: Int
     var name: String
     private var coord: Location

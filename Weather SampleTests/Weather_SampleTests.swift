@@ -121,4 +121,35 @@ class Weather_SampleTests: XCTestCase {
       wait(for: [promise], timeout: 10)
     }
     
+    
+    func testViewModel() {
+        let bundle = Bundle(for: CityWeatherCell.self)
+        guard let cell = bundle.loadNibNamed("CityWeatherCell", owner: nil)?.first as? CityWeatherCell else {
+            return XCTFail("CustomView nib did not contain a CityWeatherCell")
+         }
+        
+        
+        let model1 = CityWeatherCellDataType.loadingFailed(City(id: 123, name: "Test"))
+        cell.viewModel = model1
+        XCTAssertTrue(cell.loader.isHidden)
+        XCTAssertTrue(cell.cityName.text == "Test")
+        XCTAssertTrue(cell.subtitleLabel.text == "failed")
+        
+        
+        
+        let model2 = CityWeatherCellDataType.loading(City(id: 123, name: "Test"))
+        cell.viewModel = model2
+        XCTAssertTrue(!cell.loader.isHidden)
+        XCTAssertTrue(cell.cityName.text == "Test")
+        XCTAssertTrue(cell.subtitleLabel.text == "loading...")
+        
+        let example = WeatherData.example
+        let model3 = CityWeatherCellDataType.loaded(example)
+        
+        cell.viewModel = model3
+        XCTAssertTrue(cell.loader.isHidden)
+        XCTAssertTrue(cell.cityName.text == example.name)
+        XCTAssertTrue(cell.subtitleLabel.text == example.getData(type: .temperature))
+    }
 }
+
