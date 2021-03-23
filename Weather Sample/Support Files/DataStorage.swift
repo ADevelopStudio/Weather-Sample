@@ -9,7 +9,7 @@ import Foundation
 
 struct DataStorage {
     
-    ///beause I didn't want to spent time to create a storage to all 200,000 cities
+    ///because I didn't want to spent time to create a storage to all 200,000 cities
     static let allTheCities: [City] = [
         City(id: 2147714, name: "Sydney"),
         City(id: 2158177, name: "Melbourne"),

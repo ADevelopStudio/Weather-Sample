@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum PassedToDetailView {
+enum TypeOfDataToDetailedVC {
     case needToLoad(city: City), fulldata(data: WeatherData), nothing
     var weatherData: WeatherData? {
         switch self {

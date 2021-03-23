@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KeA-CD-euR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -11,7 +11,7 @@
         <!--Weather-->
         <scene sceneID="rlo-rt-RNQ">
             <objects>
-                <tableViewController id="F23-TE-Kkf" customClass="MainTableViewController" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MainTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="F23-TE-Kkf" customClass="MainTableViewController" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SMg-AC-XWg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,13 +25,10 @@
                         <barButtonItem key="backBarButtonItem" title="  " id="0UG-bD-oOb"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="JJM-V8-iBX">
                             <connections>
-                                <segue destination="XZR-yI-d4H" kind="presentation" modalPresentationStyle="fullScreen" id="QEG-6w-pfK"/>
+                                <action selector="searchCitiesPressed:" destination="F23-TE-Kkf" id="aC2-Rr-E64"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="T7W-0w-WyP" kind="show" identifier="details" id="WX7-lT-NxA"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jr-rF-SNv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -40,13 +37,13 @@
         <!--Detailed WeatherVC-->
         <scene sceneID="L3s-0S-fw8">
             <objects>
-                <viewController id="T7W-0w-WyP" customClass="DetailedWeatherVC" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailedWeatherVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="T7W-0w-WyP" customClass="DetailedWeatherVC" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C69-OK-sxG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vMf-BY-gjr">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDK-Ri-fEp">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
@@ -88,7 +85,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wwk-MJ-VCL">
-                                        <rect key="frame" x="0.0" y="178" width="414" height="630"/>
+                                        <rect key="frame" x="0.0" y="178" width="414" height="674"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="ip8-b0-IhV" detailTextLabel="24X-jN-Oos" style="IBUITableViewCellStyleValue1" id="De9-fm-MW5">
@@ -142,30 +139,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwN-kE-iUo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1755.072463768116" y="377.67857142857139"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="pDO-0c-QUj">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KeA-CD-euR" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="orn-Yi-Nyh">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="F23-TE-Kkf" kind="relationship" relationship="rootViewController" id="BoF-T7-le3"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ofz-fB-mDK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-94.20289855072464" y="227.67857142857142"/>
+            <point key="canvasLocation" x="2464" y="228"/>
         </scene>
         <!--Search CityVC-->
         <scene sceneID="RdT-0h-fDg">
             <objects>
-                <tableViewController id="6Yl-Oy-6AR" customClass="SearchCityVC" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchCityVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Yl-Oy-6AR" customClass="SearchCityVC" customModule="Weather_Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d9Q-vr-21k">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,26 +191,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u88-6G-sSm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2642.0289855072465" y="-384.375"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4ro-Zy-ARB">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XZR-yI-d4H" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="0Qr-eu-gg1"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eUe-4Y-8AI">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="6Yl-Oy-6AR" kind="relationship" relationship="rootViewController" id="wkG-v0-DK5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YE0-R2-nbz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1731.8840579710147" y="-384.375"/>
+            <point key="canvasLocation" x="1677" y="228"/>
         </scene>
     </scenes>
     <resources>

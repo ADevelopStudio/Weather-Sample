@@ -23,15 +23,16 @@ extension SearchCityVC: UISearchBarDelegate {
 }
 
 
-class SearchCityVC: UITableViewController {
+class SearchCityVC: UITableViewController, Storyboarded {
+    weak var coordinator: MainCoordinator?
 
     var cityList = DataStorage.allTheCities
     var savedCities = DataStorage.getSavedCities()
-    
     var searchTimer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Search cities"
         self.tableView.tableFooterView = UIView()
     }
     

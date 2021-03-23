@@ -7,12 +7,13 @@
 
 import UIKit
 
-class DetailedWeatherVC: UIViewController {
+class DetailedWeatherVC: UIViewController, Storyboarded {
     @IBOutlet weak var weatherConditions: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var weatherIcon: UIImageView!
 
-    var passedData: PassedToDetailView = .nothing
+    weak var coordinator: MainCoordinator?
+    var passedData: TypeOfDataToDetailedVC = .nothing
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,7 +7,8 @@
 
 import UIKit
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController, Storyboarded {
+    weak var coordinator: MainCoordinator?
 
     var cities = DataStorage.getSavedCities()
     
@@ -17,6 +18,10 @@ class MainTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "CityWeatherCell", bundle: nil), forCellReuseIdentifier: "CityWeatherCell")
         tableView.tableFooterView = UIView()
+    }
+    
+    @IBAction func searchCitiesPressed(_ sender: Any) {
+        coordinator?.searchCities()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,17 +57,12 @@ class MainTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) as? CityWeatherCell,
               let cityWeather = cell.cityWeather else {
-            self.performSegue(withIdentifier: "details", sender: PassedToDetailView.needToLoad(city:  cities[indexPath.row]))
+            coordinator?.showWeatherDetailed(data:  .needToLoad(city:  cities[indexPath.row]))
             return
         }
-        self.performSegue(withIdentifier: "details", sender: PassedToDetailView.fulldata(data: cityWeather))
+        coordinator?.showWeatherDetailed(data: .fulldata(data: cityWeather))
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? DetailedWeatherVC, let data = sender as? PassedToDetailView {
-            vc.passedData = data
-        }
-    }
+
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0
         UIView.animate(withDuration: 0.1, delay:  0.1 * Double(indexPath.row), options: [.curveEaseInOut]) {
