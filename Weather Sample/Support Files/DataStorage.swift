@@ -41,8 +41,13 @@ struct DataStorage {
         ]
         guard let data = UserDefaults.standard.value(forKey:"cityList") as? Data  else {return defaultList}
         do {
-            let array = try PropertyListDecoder().decode([City].self, from: data)
-            return array
+            var tempArray = Array<City>()
+            let savedArray = try PropertyListDecoder().decode([City].self, from: data)
+            savedArray.forEach({ city in
+                //just in case to make sure data is not duplicated
+                if let _ = tempArray.firstIndex(where: {$0.id == city.id}) {} else {tempArray.append(city)}
+            })
+            return tempArray
         } catch {
             return defaultList
         }
