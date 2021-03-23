@@ -6,12 +6,27 @@
 //
 
 import UIKit
+extension MainTableViewController: CityWeatherCellDelegate {
+    func cityWeatherSelected(model: CityWeatherCellViewModel) {
+        guard let  type = model as? CityWeatherCellDataType else {return}
+        switch type {
+        case .loaded(let fullData):
+            coordinator?.showWeatherDetailed(data: .fulldata(data: fullData))
+        case .loading(let city):
+            coordinator?.showWeatherDetailed(data: .needToLoad(city: city))
+        case .loadingFailed(let city):
+            coordinator?.showWeatherDetailed(data: .needToLoad(city: city))
+        }
+    }
+}
+
 
 class MainTableViewController: UITableViewController, Storyboarded {
     weak var coordinator: MainCoordinator?
 
     var cities = DataStorage.getSavedCities()
     
+    //It was a task to update the weather every 1 minute
     fileprivate var timerForUpdate: Timer?
     
     override func viewDidLoad() {
@@ -48,25 +63,18 @@ class MainTableViewController: UITableViewController, Storyboarded {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CityWeatherCell", for: indexPath) as? CityWeatherCell else {
             return UITableViewCell()
         }
-        cell.fillWith(city: cities[indexPath.row])
+        let viewModel = CityWeatherCellDataType.loading( cities[indexPath.row])
+        cell.fillWith(initialData: viewModel, delegate: self)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let cell = tableView.cellForRow(at: indexPath) as? CityWeatherCell,
-              let cityWeather = cell.cityWeather else {
-            coordinator?.showWeatherDetailed(data:  .needToLoad(city:  cities[indexPath.row]))
-            return
-        }
-        coordinator?.showWeatherDetailed(data: .fulldata(data: cityWeather))
     }
 
+    ///cell appearance animation
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.alpha = 0
-        UIView.animate(withDuration: 0.1, delay:  0.1 * Double(indexPath.row), options: [.curveEaseInOut]) {
-            cell.alpha = 1
-        }
+        UIView.animate(withDuration: 0.1, delay:  0.1 * Double(indexPath.row), options: [.curveEaseInOut]) {cell.alpha = 1}
     }
 }

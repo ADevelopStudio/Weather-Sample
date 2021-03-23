@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct CityWeatherCellViewModel {
-    
+protocol CityWeatherCellViewModel {
+    var title: String {get}
+    var subTitle: String {get}
+    var iconURL: URL? {get}
+    var isLoading: Bool {get}
+    func loadFullData(complition: @escaping (CityWeatherCellViewModel)->())
 }
